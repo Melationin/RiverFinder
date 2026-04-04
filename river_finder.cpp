@@ -169,7 +169,7 @@ std::vector<Res> findBiggestRiver(
 
     for (int dz = -R_out; dz <= R_out; dz++)
     {
-        Mask m;
+        Mask m{};
         m.dz = dz;
         m.out = dxOut[dz + R_out];
         m.in = (abs(dz) <= R_in) ? dxIn[dz + R_in] : -1;

@@ -7,7 +7,8 @@
 #include <vector>
 #include <set>
 
-#include "..\river_finder.cpp"
+#include "../river_finder.cpp"
+
 
 
 std::vector<Res> dedup(const std::vector<Res>& v){

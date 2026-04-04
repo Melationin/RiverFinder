@@ -12,3 +12,6 @@ a.out
 
 /.vs/
 /out/
+/bin/
+/bing/
+/build/

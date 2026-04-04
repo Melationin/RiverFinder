@@ -24,7 +24,7 @@ public:
     {
         std::lock_guard<std::mutex> lock(mutex_);
         results_.push_back(res);
-        clear();
+        clean();
     }
 
     void addResults(const std::vector<T> &newResults)
@@ -33,7 +33,7 @@ public:
 
         T new_max = *std::max_element(newResults.cbegin(), newResults.cend());
         results_.insert(results_.end(), newResults.cbegin(), newResults.cend());
-        clear();
+        clean();
     }
 
 
@@ -42,7 +42,7 @@ public:
         return results_.size();
     }
 
-    void clear()
+    void clean()
     {
         if (results_.size() > 4000)
         {
@@ -53,7 +53,10 @@ public:
             results_.resize(1000);
         }
     }
-
+    void clear()
+    {
+        results_.clear();
+    }
     [[nodiscard]] bool empty() const
     {
         return results_.empty();

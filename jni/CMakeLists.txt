@@ -20,7 +20,6 @@ find_package(JNI REQUIRED)
 
 set(SOURCES
         sunnyslopes_riverfinder_RiverFinderBridge.cpp
-
         ../cubiomes/finders.c
         ../cubiomes/generator.c
         ../cubiomes/layers.c
