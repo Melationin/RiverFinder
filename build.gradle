@@ -1,0 +1,84 @@
+plugins {
+    id 'base'
+}
+
+group = 'sunnyslopes'
+version = '1.1.0'
+
+def nativeOutDir = layout.buildDirectory.dir('native').get().asFile
+def objDir = layout.buildDirectory.dir('obj').get().asFile
+
+def msysRoot = System.getenv('MSYS2_ROOT') ?: 'C:\\msys64'
+def msysBin = file("${msysRoot}/ucrt64/bin")
+
+def resolveJavaHome() {
+    def javaHome = System.getenv('JAVA_HOME')
+    if (javaHome == null || javaHome.isEmpty()) {
+        javaHome = System.getProperty('java.home')
+    }
+    def javaHomeFile = file(javaHome)
+    if (javaHomeFile.name.equalsIgnoreCase('jre') && javaHomeFile.parentFile != null) {
+        javaHome = javaHomeFile.parentFile.absolutePath
+    }
+    if (javaHome.endsWith('\\bin') || javaHome.endsWith('/bin')) {
+        javaHome = file(javaHome).parentFile.absolutePath
+    }
+    def jdk17 = file('C:/Program Files/Java/jdk-17')
+    if ((!file("${javaHome}/include/jni.h").exists()) && jdk17.exists()) {
+        javaHome = jdk17.absolutePath
+    }
+    return javaHome
+}
+
+tasks.register('buildNativeMsys2', Exec) {
+    group = 'build'
+    description = 'Build libriverFinderLibJ.dll via MSYS2 UCRT64 gcc/g++ (RiverFinderBase)'
+    outputs.dir(nativeOutDir)
+
+    doFirst {
+        if (!file("${msysBin}/gcc.exe").exists() || !file("${msysBin}/g++.exe").exists()) {
+            throw new GradleException("MSYS2 gcc/g++ not found under ${msysBin}")
+        }
+        nativeOutDir.mkdirs()
+        objDir.mkdirs()
+    }
+
+    def javaHome = resolveJavaHome()
+    def script = file('build_jni_msys2.ps1')
+    commandLine 'powershell.exe', '-NoProfile', '-ExecutionPolicy', 'Bypass',
+        '-File', script.absolutePath,
+        '-OutDir', nativeOutDir.absolutePath,
+        '-ObjDir', objDir.absolutePath,
+        '-JavaHome', javaHome
+}
+
+tasks.register('copyNativeArtifacts') {
+    dependsOn buildNativeMsys2
+    group = 'build'
+    description = 'Ensure Windows native library is in build/native'
+    outputs.dir(nativeOutDir)
+    doLast {
+        def dll = new File(nativeOutDir, 'libriverFinderLibJ.dll')
+        if (!dll.exists()) {
+            throw new GradleException("Native DLL missing after MSYS2 build: ${dll}")
+        }
+        logger.lifecycle("Native artifact ready: ${dll}")
+    }
+}
+
+tasks.named('assemble') {
+    dependsOn copyNativeArtifacts
+}
+
+configurations {
+    nativeLibs {
+        canBeConsumed = true
+        canBeResolved = false
+    }
+}
+
+artifacts {
+    nativeLibs(nativeOutDir) {
+        builtBy copyNativeArtifacts
+    }
+}

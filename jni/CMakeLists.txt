@@ -68,6 +68,8 @@ endif()
 # ========= 输出目录 =========
 
 set_target_properties(riverFinderLibJ PROPERTIES
+        PREFIX "lib"
+        OUTPUT_NAME "riverFinderLibJ"
         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/native
         LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/native
 )

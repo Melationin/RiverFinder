@@ -7,57 +7,55 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-    /*
-     * Class:     sunnyslopes_riverfinder_RiverFinderBridge
-     * Method:    riverSearch
-     * Signature: (JIIIIIIFI)[I
-     */
-    JNIEXPORT jintArray JNICALL Java_sunnyslopes_riverfinder_RiverFinderBridge_riverSearch
-      (JNIEnv *, jclass, jlong, jint, jint, jint, jint, jint, jint, jfloat, jint);
+/*
+ * Class:     sunnyslopes_riverfinder_RiverFinderBridge
+ * Method:    riverSearch
+ * Signature: (JIIIIIIFIF)[I
+ */
+JNIEXPORT jintArray JNICALL Java_sunnyslopes_riverfinder_RiverFinderBridge_riverSearch
+  (JNIEnv *, jclass, jlong, jint, jint, jint, jint, jint, jint, jfloat, jint, jfloat);
 
-    /*
-     * Class:     sunnyslopes_riverfinder_RiverFinderBridge
-     * Method:    getSearchProgress
-     * Signature: ()[I
-     */
-    JNIEXPORT jintArray JNICALL Java_sunnyslopes_riverfinder_RiverFinderBridge_getSearchProgress
-      (JNIEnv *, jclass);
+/*
+ * Class:     sunnyslopes_riverfinder_RiverFinderBridge
+ * Method:    getSearchProgress
+ * Signature: ()[I
+ */
+JNIEXPORT jintArray JNICALL Java_sunnyslopes_riverfinder_RiverFinderBridge_getSearchProgress
+  (JNIEnv *, jclass);
 
-    /*
-     * Class:     sunnyslopes_riverfinder_RiverFinderBridge
-     * Method:    getBestResult
-     * Signature: ()[I
-     */
-    JNIEXPORT jintArray JNICALL Java_sunnyslopes_riverfinder_RiverFinderBridge_getNowResult
-      (JNIEnv *, jclass);
+/*
+ * Class:     sunnyslopes_riverfinder_RiverFinderBridge
+ * Method:    getNowResult
+ * Signature: ()[I
+ */
+JNIEXPORT jintArray JNICALL Java_sunnyslopes_riverfinder_RiverFinderBridge_getNowResult
+  (JNIEnv *, jclass);
 
-    /*
-     * Class:     sunnyslopes_riverfinder_RiverFinderBridge
-     * Method:    pause
-     * Signature: ()Z
-     */
-    JNIEXPORT jboolean JNICALL Java_sunnyslopes_riverfinder_RiverFinderBridge_pause
-      (JNIEnv *, jclass);
+/*
+ * Class:     sunnyslopes_riverfinder_RiverFinderBridge
+ * Method:    pause
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_sunnyslopes_riverfinder_RiverFinderBridge_pause
+  (JNIEnv *, jclass);
 
-    /*
-     * Class:     sunnyslopes_riverfinder_RiverFinderBridge
-     * Method:    resume
-     * Signature: ()Z
-     */
-    JNIEXPORT jboolean JNICALL Java_sunnyslopes_riverfinder_RiverFinderBridge_resume
-      (JNIEnv *, jclass);
+/*
+ * Class:     sunnyslopes_riverfinder_RiverFinderBridge
+ * Method:    resume
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_sunnyslopes_riverfinder_RiverFinderBridge_resume
+  (JNIEnv *, jclass);
 
-    /*
-     * Class:     sunnyslopes_riverfinder_RiverFinderBridge
-     * Method:    stop
-     * Signature: ()Z
-     */
-    JNIEXPORT jboolean JNICALL Java_sunnyslopes_riverfinder_RiverFinderBridge_stop
-      (JNIEnv *, jclass);
+/*
+ * Class:     sunnyslopes_riverfinder_RiverFinderBridge
+ * Method:    stop
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_sunnyslopes_riverfinder_RiverFinderBridge_stop
+  (JNIEnv *, jclass);
 
 #ifdef __cplusplus
 }
-
-
 #endif
 #endif
