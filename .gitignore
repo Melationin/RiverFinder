@@ -1,17 +1,53 @@
-find_compactbiomes
-find_quadhuts
-.cproject
-.project
-cubiomes/docs/LayerSummary.aux
-cubiomes/docs/LayerSummary.log
-cubiomes/docs/LayerSummary.synctex.gz
-cubiomes/docs/LayerSummary.toc
-*.o
-*.a
-a.out
-
-/.vs/
+# Build outputs
+/build/
 /out/
 /bin/
 /bing/
-/build/
+*.o
+*.a
+*.dll
+*.so
+*.dylib
+*.exe
+a.out
+find_compactbiomes
+find_quadhuts
+
+# CMake
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+compile_commands.json
+.cmake/
+Testing/
+
+# Gradle
+.gradle/
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.vs/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Eclipse
+.cproject
+.project
+.settings/
+
+# cubiomes docs build leftovers
+cubiomes/docs/*.aux
+cubiomes/docs/*.log
+cubiomes/docs/*.synctex.gz
+cubiomes/docs/*.toc

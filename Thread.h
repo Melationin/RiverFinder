@@ -12,6 +12,7 @@
 #include <atomic>
 #include <algorithm>
 #include <iostream>
+#include <ranges>
 
 template<typename T>
 class ThreadSafeResults {
@@ -29,9 +30,9 @@ public:
 
     void addResults(const std::vector<T> &newResults)
     {
+        if (newResults.empty())
+            return;
         std::lock_guard<std::mutex> lock(mutex_);
-
-        T new_max = *std::max_element(newResults.cbegin(), newResults.cend());
         results_.insert(results_.end(), newResults.cbegin(), newResults.cend());
         clean();
     }
@@ -55,6 +56,7 @@ public:
     }
     void clear()
     {
+        std::lock_guard<std::mutex> lock(mutex_);
         results_.clear();
     }
     [[nodiscard]] bool empty() const
